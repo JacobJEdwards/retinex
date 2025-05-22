@@ -16,6 +16,6 @@ Use the functions provided in `retinex.py` on images loaded from `cv2` or simila
 
 [Multiscale Retinex](http://www.ipol.im/pub/art/2014/107/)
 
-[Other implementation](https://github.com/dongb5/Retinex) (this one is ~1.5x faster)
+[Other implementation](https://github.com/dongb5/Retinex) (mine is ~1.5x faster)
 
 
