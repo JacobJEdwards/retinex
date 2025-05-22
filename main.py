@@ -9,7 +9,7 @@ RETINEX_SIGMA_LIST: Final[Sequence[int]] = [15, 80, 250]
 def main() -> None:
     random_image = np.random.random_sample((100, 100, 3)) * 255
 
-    adjusted = retinex.MSSRP(
+    adjusted = retinex.MSRCP(
         random_image, RETINEX_SIGMA_LIST, low_clip=0.01, high_clip=0.99
     )
 
