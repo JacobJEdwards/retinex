@@ -67,11 +67,11 @@ def run(input_dir: Path, output_dir: Path) -> None:
         for image_path in image_paths
     ]
 
-    logger.info(f"Found {len(imgs)} images")
+    print(f"Found {len(imgs)} images")
 
     processed_imgs = process_map(process_and_save, imgs, max_workers=4, chunksize=1)
 
-    logger.info(f"Found {len(processed_imgs)} images")
+    print(f"Found {len(processed_imgs)} images")
 
     # global_mean, global_std = global_luminance_stats(img for _, img in processed_imgs)
     #
