@@ -54,7 +54,7 @@ def process_and_save(img: tuple[Path, np.ndarray]) -> tuple[Path, np.ndarray]:
 
     processed = process_image(image)
 
-    cv2.imwrite(str(path), processed)
+    # cv2.imwrite(str(path), processed)
 
     return path, processed
 
@@ -81,7 +81,7 @@ def run(input_dir: Path, output_dir: Path) -> None:
 
         tqdm.tqdm.write(f"Writing {output_path.name}")
 
-        p = output_dir / "final" / output_path.name
+        p = output_dir / output_path.name
 
         cv2.imwrite(str(p), final_image)
 
@@ -101,9 +101,6 @@ def main() -> None:
     assert input_dir.is_dir()
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "retinex").mkdir(parents=True, exist_ok=True)
-    (output_dir / "final").mkdir(parents=True, exist_ok=True)
-
     run(input_dir, output_dir)
 
 
