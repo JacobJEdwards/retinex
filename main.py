@@ -54,7 +54,7 @@ def process_and_save(img: tuple[Path, np.ndarray]) -> tuple[Path, np.ndarray]:
 
     processed = process_image(image)
 
-    # cv2.imwrite(str(path), processed)
+    cv2.imwrite(str(path), processed)
 
     return path, processed
 
@@ -63,27 +63,27 @@ def run(input_dir: Path, output_dir: Path) -> None:
     image_paths = sorted(list(input_dir.glob("*.jpg")) + list(input_dir.glob("*.png")))
 
     imgs: list[tuple[Path, np.ndarray]] = [
-        (output_dir / "retinex" / image_path.name, cv2.imread(str(image_path)))
+        (output_dir / image_path.name, cv2.imread(str(image_path)))
         for image_path in image_paths
     ]
 
     processed_imgs = process_map(process_and_save, imgs, max_workers=4, chunksize=1)
 
-    global_mean, global_std = global_luminance_stats(img for _, img in processed_imgs)
+    # global_mean, global_std = global_luminance_stats(img for _, img in processed_imgs)
+    #
+    # logger.info(f"Global mean: {global_mean}")
+    # logger.info(f"Global std: {global_std}")
 
-    logger.info(f"Global mean: {global_mean}")
-    logger.info(f"Global std: {global_std}")
+    # logger.info(f"Processing images: {len(processed_imgs)}")
 
-    logger.info(f"Processing images: {len(processed_imgs)}")
-
-    for output_path, processed_image in tqdm.tqdm(processed_imgs):
-        final_image = match_luminance(processed_image, global_mean, global_std)
-
-        tqdm.tqdm.write(f"Writing {output_path.name}")
-
-        p = output_dir / output_path.name
-
-        cv2.imwrite(str(p), final_image)
+    # for output_path, processed_image in tqdm.tqdm(processed_imgs):
+    #     final_image = match_luminance(processed_image, global_mean, global_std)
+    #
+    #     tqdm.tqdm.write(f"Writing {output_path.name}")
+    #
+    #     p = output_dir / output_path.name
+    #
+    #     cv2.imwrite(str(p), final_image)
 
 
 def main() -> None:
