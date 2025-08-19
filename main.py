@@ -60,7 +60,8 @@ def process_and_save(img: tuple[Path, np.ndarray]) -> tuple[Path, np.ndarray]:
 
 
 def run(input_dir: Path, output_dir: Path) -> None:
-    image_paths = sorted(list(input_dir.glob("*.jpg")) + list(input_dir.glob("*.png")))
+    image_paths = sorted(list(input_dir.glob("*.jpg", case_sensitive=False)) + list(input_dir.glob("*.png",
+                                                                                               case_sensitive=False)))
 
     imgs: list[tuple[Path, np.ndarray]] = [
         (output_dir / image_path.name, cv2.imread(str(image_path)))
